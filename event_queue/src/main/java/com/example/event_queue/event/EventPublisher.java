@@ -1,6 +1,6 @@
 package com.example.event_queue.event;
 
-import com.example.event_queue.domain.entity.Transaction;
+import com.example.event_queue.domain.entity.TransactionInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
@@ -14,8 +14,8 @@ public class EventPublisher {
 
   private final ApplicationEventPublisher publisher;
 
-  public void publish(final Transaction transaction) {
-    publisher.publishEvent(transaction);
+  public void publish(final TransactionInfo transactionInfo) {
+    publisher.publishEvent(transactionInfo);
   }
 
 }
