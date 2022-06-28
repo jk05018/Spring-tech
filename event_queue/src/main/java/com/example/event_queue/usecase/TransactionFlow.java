@@ -1,5 +1,8 @@
 package com.example.event_queue.usecase;
 
+import com.example.event_queue.domain.entity.TransactionInfo;
+import com.example.event_queue.domain.service.TransactionService;
+import com.example.event_queue.event.EventPublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,17 @@ public class TransactionFlow {
    * 10. 큐가 꽉 차 있다면 상태를 QUEUE_WAIT로 데이터베이스 업데이트
    * 11. 백그라운드 스레드에서 큐에 있는 결제 거래들을 처리하고 상태를 SUCCESS 혹은 FAILURE로 업데이트
    * 12. 결제 거래 완료에 대한 후처리를 진행(ex. 결제 결과를 사용자의 앱으로 푸쉬)
+   *
    */
+
+  private final EventPublisher eventPublisher;
+  private final TransactionService transactionService;
+
+  public TransactionInfo save(final TransactionInfo transactionInfo) {
+    TransactionInfo info = transactionService.save(transactionInfo);
+    log.info("Create new Transaction {}", transactionInfo);
+    eventPublisher.publish(info);
+    return info;
+  }
 
 }
