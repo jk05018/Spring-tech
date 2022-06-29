@@ -1,4 +1,4 @@
-성package com.example.event.controller;
+package com.example.event.controller;
 
 import com.example.event.service.FileService;
 import java.util.Map;
