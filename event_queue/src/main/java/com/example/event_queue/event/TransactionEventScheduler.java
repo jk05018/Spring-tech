@@ -22,4 +22,5 @@ public class TransactionEventScheduler {
     new TransactionEventWorker(eventQueue, transactionService)
         .run();
   }
+
 }
