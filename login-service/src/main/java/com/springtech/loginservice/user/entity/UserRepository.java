@@ -3,7 +3,7 @@ package com.springtech.loginservice.user.entity;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LoginUserRepository extends JpaRepository<LoginUser, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
-  Optional<LoginUser> findByEmail(String email);
+  Optional<User> findByEmail(final String email);
 }

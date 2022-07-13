@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class LoginUser {
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public class LoginUser {
   private Role role;
 
   @Builder
-  public LoginUser(String name, String email, String picture, Role role) {
+  public User(final String name, final String email, final String picture, final Role role) {
     validateName(name);
     checkArgument(hasText(email), "유저 이메일은 공백일 수 없습니다.");
     checkArgument(nonNull(role), "유저는 반드시 하나의 역할을 가지고 있어야 한다.");
@@ -49,11 +49,11 @@ public class LoginUser {
     this.role = role;
   }
 
-  private void validateName(String name) {
+  private void validateName(final String name) {
     checkArgument(hasText(name), "유저 이름은 공백일 수 없습니다.");
   }
 
-  public LoginUser update(String name, String picture) {
+  public User update(final String name, final String picture) {
     validateName(name);
 
     this.name = name;
