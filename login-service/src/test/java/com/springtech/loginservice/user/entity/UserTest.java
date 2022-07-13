@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-class LoginUserTest {
+class UserTest {
 
   final String name = "seunghan";
   final String email = "seunghan@google.com";
@@ -16,9 +16,9 @@ class LoginUserTest {
   final Role guest = Role.GUEST;
 
   @Test
-  void LoginUser_생성_테스트() {
+  void User_생성_테스트() {
     // when
-    final LoginUser user = LoginUser.builder()
+    final User user = User.builder()
         .name(name)
         .email(email)
         .picture(picture)
@@ -27,15 +27,15 @@ class LoginUserTest {
 
     // then
     assertThat(user)
-        .extracting(LoginUser::getName, LoginUser::getEmail, LoginUser::getPicture,
-            LoginUser::getRole)
+        .extracting(User::getName, User::getEmail, User::getPicture,
+            User::getRole)
         .isEqualTo(List.of(name, email, picture, guest));
   }
 
   @ParameterizedTest
   @NullAndEmptySource
-  void 이름_공백_LoginUser_생성_실패_테스트(String nullAndEmptyName) {
-    Assertions.assertThatThrownBy(() -> LoginUser.builder()
+  void 이름_공백_User_생성_실패_테스트(String nullAndEmptyName) {
+    Assertions.assertThatThrownBy(() -> User.builder()
             .name(nullAndEmptyName)
             .email(email)
             .picture(picture)
@@ -46,8 +46,8 @@ class LoginUserTest {
 
   @ParameterizedTest
   @NullAndEmptySource
-  void 이메일_공백_LoginUser_생성_실패_테스트(String nullAndEmptyEmail) {
-    Assertions.assertThatThrownBy(() -> LoginUser.builder()
+  void 이메일_공백_User_생성_실패_테스트(String nullAndEmptyEmail) {
+    Assertions.assertThatThrownBy(() -> User.builder()
             .name(name)
             .email(nullAndEmptyEmail)
             .picture(picture)
@@ -57,8 +57,8 @@ class LoginUserTest {
   }
 
   @Test
-  void 역할_NULL_LoginUser_생성_실패_테스트() {
-    Assertions.assertThatThrownBy(() -> LoginUser.builder()
+  void 역할_NULL_User_생성_실패_테스트() {
+    Assertions.assertThatThrownBy(() -> User.builder()
             .name(name)
             .email(email)
             .picture(picture)
@@ -70,7 +70,7 @@ class LoginUserTest {
   @Test
   void 이름_사진_update_테스트() {
     // given
-    LoginUser user = LoginUser.builder()
+    User user = User.builder()
         .name(name)
         .email(email)
         .picture(picture)
@@ -81,11 +81,11 @@ class LoginUserTest {
     final String updatePicture = "updatePicture";
 
     // when
-    final LoginUser updateUser = user.update(updateName, updatePicture);
+    final User updateUser = user.update(updateName, updatePicture);
 
     // then
     assertThat(updateUser)
-        .extracting(LoginUser::getName, LoginUser::getPicture)
+        .extracting(User::getName, User::getPicture)
         .isEqualTo(List.of(updateName, updatePicture));
   }
 }
