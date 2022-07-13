@@ -10,6 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+  private final CustomOAuth2UserService customOAuth2UserService;
+
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http
@@ -18,7 +20,6 @@ public class SecurityConfig {
         .and()
         .authorizeRequests()
         .antMatchers("/", "/h2-console/**").permitAll()
-//        .antMatchers("/api/v1/**").hasRole(Role.USER.name())
         .anyRequest().authenticated()
         .and()
         .logout()
