@@ -23,11 +23,11 @@ public class SecurityConfig {
         .anyRequest().authenticated()
         .and()
         .logout()
-        .logoutSuccessUrl("/");
-//        .and()
-//        .oauth2Login();
-//        .userInfoEndpoint()
-//        .userService(customOAuth2UserService);
+        .logoutSuccessUrl("/")
+        .and()
+        .oauth2Login()
+        .userInfoEndpoint()
+        .userService(customOAuth2UserService);
     return http.build();
   }
 
