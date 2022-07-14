@@ -1,5 +1,6 @@
 package com.springtech.loginservice.web;
 
+import com.springtech.loginservice.config.auth.LoginUser;
 import com.springtech.loginservice.config.auth.SessionUser;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,7 @@ public class IndexController {
   private final HttpSession httpSession;
 
   @GetMapping("/")
-  public String index(Model model) {
-    SessionUser user = (SessionUser) httpSession.getAttribute("user");
+  public String index(Model model, @LoginUser SessionUser user) {
 
     if (user != null) {
       model.addAttribute("userName", user.getName());
