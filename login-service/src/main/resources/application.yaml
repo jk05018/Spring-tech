@@ -4,6 +4,7 @@ spring:
   jpa:
     hibernate:
       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      ddl-auto: create
   session:
     store-type: jdbc
   datasource:
